@@ -35,8 +35,16 @@ async function loadRecommendations() {
     if (!simData) {
         console.log("Loading map_similarity.json...");
         try {
-            simData = await fetch("map_similarity.json").then(r => r.json());
-            console.log("Loaded simData:", simData.slice(0, 5));
+            console.log("Loading map_similarity.json.gz...");
+
+            const resp2 = await fetch("map_similarity.json.gz");
+            const blob2 = await resp2.blob();
+            const buf2 = await blob2.arrayBuffer();
+            const text2 = new TextDecoder().decode(pako.ungzip(new Uint8Array(buf2)));
+
+            simData = JSON.parse(text2);
+
+            console.log("Loaded simData:", simData.length, "rows");
         } catch (err) {
             console.error("FAILED to load similarity data:", err);
             document.getElementById("results").innerHTML =
