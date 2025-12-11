@@ -5,7 +5,12 @@ async function loadRecommendations() {
     const playerId = document.getElementById("playerIdInput").value;
 
     if (!playerData) {
-        playerData = await fetch("player_best_times.json").then(r => r.json());
+        const response = await fetch("player_best_times.json.gz");
+        const blob = await response.blob();
+        const decompressed = await blob.arrayBuffer().then(buffer =>
+            new TextDecoder().decode(pako.ungzip(new Uint8Array(buffer)))
+        );
+        const playerData = JSON.parse(decompressed);
     }
     if (!simData) {
         simData = await fetch("map_similarity.json").then(r => r.json());
