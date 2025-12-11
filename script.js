@@ -95,9 +95,9 @@ async function loadRecommendations() {
     }
 
     // Remove maps already played
-    for (let p of playerMaps) {
-        delete scores[p.map_name];
-    }
+    //for (let p of playerMaps) {
+    //    delete scores[p.map_name];
+    //}
 
     // Sort + take top 15
     const sorted = Object.entries(scores)
