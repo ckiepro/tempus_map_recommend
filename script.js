@@ -1,6 +1,19 @@
 let simData = null;
 let playerData = null;
 
+window.addEventListener("DOMContentLoaded", async () => {
+    await loadAllData();
+});
+
+async function loadAllData() {
+    console.log("Preloading data...");
+
+    playerData = await loadCompressedJSON("player_best_times.json.gz");
+    simData = await loadCompressedJSON("map_similarity.json.gz");
+
+    console.log("Data preloaded.");
+}
+
 async function loadCompressedJSON(url) {
     const res = await fetch(url);
     if (!res.ok) throw new Error("Failed to fetch " + url);
