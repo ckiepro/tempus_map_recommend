@@ -6,7 +6,7 @@ async function loadRecommendations() {
 
   try {
     const res = await fetch(
-      `https://<your-worker-name>.workers.dev/player/${playerId}`
+      `https://tempus-map-recommend.ckiepro.workers.dev/player/${playerId}`
     );
 
     if (!res.ok) {
