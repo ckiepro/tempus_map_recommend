@@ -18,7 +18,7 @@ async function loadRecommendations() {
 
     results.innerHTML = data
       .map(
-        r => `<p><b>${r.map}</b> — score ${r.score.toFixed(4)}</p>`
+        r => `<p><b>${r.map}</b>: ${r.score.toFixed(4)}</p>`
       )
       .join("");
 
