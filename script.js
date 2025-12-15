@@ -16,6 +16,7 @@ async function loadRecommendations() {
     results.innerHTML = data
       .map(r => `<p><b>${r.map}</b>: ${r.score.toFixed(4)}</p>`)
       .join("");
+    displayTopPlayers();
     return;
   }
 
@@ -40,8 +41,29 @@ async function loadRecommendations() {
       .map(r => `<p><b>${r.map}</b>: ${r.score.toFixed(4)}</p>`)
       .join("");
 
+    // Display troll players
+    displayTopPlayers();
+
   } catch (err) {
     results.textContent = "Error loading recommendations.";
     console.error(err);
   }
+}
+
+function displayTopPlayers() {
+  const players = [
+    { name: "boshy", score: Math.random() * (0.15 - 0.1) + 0.1 },
+    { name: "bunny", score: Math.random() * (0.15 - 0.1) + 0.1 },
+    { name: "vice", score: Math.random() * (0.15 - 0.1) + 0.1 },
+    { name: "nikita", score: Math.random() * (0.15 - 0.1) + 0.1 },
+    { name: "arinet", score: Math.random() * (0.15 - 0.1) + 0.1 }
+  ];
+
+  // Sort by score descending
+  players.sort((a, b) => b.score - a.score);
+
+  const topPlayers = document.getElementById("topPlayers");
+  topPlayers.innerHTML = players
+    .map(p => `<p><b>${p.name}</b>: ${p.score.toFixed(4)}</p>`)
+    .join("");
 }
