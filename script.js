@@ -3,10 +3,6 @@ const playerCache = new Map();
 async function loadRecommendations() {
   const playerId = document.getElementById("playerIdInput").value.trim();
   const results = document.getElementById("results");
-  const topPlayersSection = document.getElementById("topPlayersSection");
-
-  // Hide top players section
-  topPlayersSection.style.display = "none";
 
   // Validation
   if (!playerId || !/^\d+$/.test(playerId)) {
@@ -45,32 +41,8 @@ async function loadRecommendations() {
       .map(r => `<p><b>${r.map}</b>: ${r.score.toFixed(4)}</p>`)
       .join("");
 
-    // Display troll players after successful results
-    displayTopPlayers();
-
   } catch (err) {
     results.textContent = "Error loading recommendations.";
     console.error(err);
   }
-}
-
-function displayTopPlayers() {
-  const players = [
-    { name: "boshy", score: Math.random() * (0.15 - 0.1) + 0.1 },
-    { name: "bunny", score: Math.random() * (0.15 - 0.1) + 0.1 },
-    { name: "nikita", score: Math.random() * (0.15 - 0.1) + 0.1 },
-    { name: "vice", score: Math.random() * (0.15 - 0.1) + 0.1 },
-    { name: "arinet", score: Math.random() * (0.15 - 0.1) + 0.1 }
-  ];
-
-  // Sort by score descending
-  players.sort((a, b) => b.score - a.score);
-
-  const topPlayers = document.getElementById("topPlayers");
-  topPlayers.innerHTML = players
-    .map(p => `<p><b>${p.name}</b>: ${p.score.toFixed(4)}</p>`)
-    .join("");
-
-  // Show the section
-  document.getElementById("topPlayersSection").style.display = "block";
 }
