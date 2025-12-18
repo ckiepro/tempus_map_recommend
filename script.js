@@ -3,7 +3,7 @@ const playerCache = new Map();
 async function loadRecommendations() {
   const playerId = document.getElementById("playerIdInput").value.trim();
   const results = document.getElementById("results");
-  const resultsHeading = document.querySelector("h2");
+  const resultsHeading = document.getElementById("resultsHeading");
 
   // Validation
   if (!playerId || !/^\d+$/.test(playerId)) {
