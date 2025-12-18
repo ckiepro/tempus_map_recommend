@@ -3,10 +3,12 @@ const playerCache = new Map();
 async function loadRecommendations() {
   const playerId = document.getElementById("playerIdInput").value.trim();
   const results = document.getElementById("results");
+  const resultsHeading = document.querySelector("h2");
 
   // Validation
   if (!playerId || !/^\d+$/.test(playerId)) {
     results.textContent = "Please enter a valid player ID.";
+    resultsHeading.textContent = "Results";
     return;
   }
 
@@ -16,11 +18,12 @@ async function loadRecommendations() {
     results.innerHTML = data
       .map(r => `<p><b>${r.map}</b>: ${r.score.toFixed(4)}</p>`)
       .join("");
-    displayTopPlayers();
+    resultsHeading.textContent = "Results (updated 2025-12-18)";
     return;
   }
 
   results.textContent = "Loading...";
+  resultsHeading.textContent = "Results";
 
   try {
     const res = await fetch(
@@ -29,6 +32,7 @@ async function loadRecommendations() {
 
     if (!res.ok) {
       results.textContent = "Player not found.";
+      resultsHeading.textContent = "Results";
       return;
     }
 
@@ -41,8 +45,11 @@ async function loadRecommendations() {
       .map(r => `<p><b>${r.map}</b>: ${r.score.toFixed(4)}</p>`)
       .join("");
 
+    resultsHeading.textContent = "Results (updated 2025-12-18)";
+
   } catch (err) {
     results.textContent = "Error loading recommendations.";
+    resultsHeading.textContent = "Results";
     console.error(err);
   }
 }

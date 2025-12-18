@@ -3,6 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Map Recommendations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .faq {
+            margin-top: 40px;
+            border-top: 2px solid #ccc;
+            padding-top: 20px;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .faq-answer {
+            margin-left: 20px;
+            color: #333;
+        }
+    </style>
 </head>
 <body>
     <h1>Map Recommendations</h1>
@@ -13,6 +41,40 @@
 
     <h2>Results</h2>
     <div id="results"></div>
+
+    <div class="faq">
+        <h2>FAQ</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question">What is this?</div>
+            <div class="faq-answer">A tool made by me that looks at a player's best runs (by rank) and returns a list of what maps have the most similar leaderboards (in terms of players). One way to think of the list is "these are the 50 maps with the most similar leaderboards to my best maps"</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">What does the score mean?</div>
+            <div class="faq-answer">The exact number doesn't really matter, just know the higher the number the more similar it is to your best maps.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Didn't something like this exist before?</div>
+            <div class="faq-answer">Yes, there was a tool by Larry? that existed before, however this project and site is my own work.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">The results seem off. Why?</div>
+            <div class="faq-answer">Might be outdated, may be an outlier, or you might play more wallpogo than you'd like to admit.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">Is this for soldier, demoman, or both?</div>
+            <div class="faq-answer">Soldier only. I don't care about demoman.</div>
+        </div>
+        
+        <div class="faq-item">
+            <div class="faq-question">I have a complaint to make, who should I reach out to?</div>
+            <div class="faq-answer">Please direct all negative feedback to Star9672 on discord.</div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
