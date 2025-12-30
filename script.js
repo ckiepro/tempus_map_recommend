@@ -26,40 +26,27 @@ function applyFilters() {
   const hideWRCheckbox = document.getElementById('hideWR');
   const hideTTCheckbox = document.getElementById('hideTT');
   const hideG1Checkbox = document.getElementById('hideG1');
-  
-  const hideWR = hideWRCheckbox.checked;
-  const hideTT = hideTTCheckbox.checked;
-  const hideG1 = hideG1Checkbox.checked;
-  
-  // Track what was just changed by comparing to previous state
-  // We need to determine which checkbox triggered this call
-  
-  // Enforce cascading hide rules (when checking boxes)
-  if (hideTT && !hideWR) {
-    // Hide TTs also hides WRs
-    hideWRCheckbox.checked = true;
-  }
-  if (hideG1 && (!hideTT || !hideWR)) {
-    // Hide G1s also hides TTs and WRs
+
+  // Enforce cascading hide rules
+  if (hideG1Checkbox.checked) {
     hideTTCheckbox.checked = true;
     hideWRCheckbox.checked = true;
+  } else if (hideTTCheckbox.checked) {
+    hideWRCheckbox.checked = true;
   }
-  
-  // Enforce cascading unhide rules (when unchecking boxes)
-  if (!hideWR && (hideTT || hideG1)) {
-    // Unchecking WR unchecks TT and G1
+
+  // Enforce cascading unhide rules
+  if (!hideWRCheckbox.checked) {
     hideTTCheckbox.checked = false;
     hideG1Checkbox.checked = false;
-  }
-  if (!hideTT && hideG1) {
-    // Unchecking TT unchecks G1
+  } else if (!hideTTCheckbox.checked) {
     hideG1Checkbox.checked = false;
   }
-  
+
   if (!currentData) return;
-  
   displayResults(currentData);
 }
+
 
 function displayResults(data) {
   const results = document.getElementById('results');
