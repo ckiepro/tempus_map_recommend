@@ -18,7 +18,8 @@ function getPlacementCategory(placement) {
   if (!placement) return null;
   if (placement === 1) return 'wr';
   if (placement >= 2 && placement <= 10) return 'tt';
-  return 'g1';
+  if (placement === 11) return 'g1';
+  return 'other';
 }
 
 function applyFilters() {
@@ -30,7 +31,7 @@ function applyFilters() {
   if (hideTT && !hideWR) {
     document.getElementById('hideWR').checked = true;
   }
-  if (hideG1 && !hideTT) {
+  if (hideG1 && (!hideTT || !hideWR)) {
     document.getElementById('hideTT').checked = true;
     document.getElementById('hideWR').checked = true;
   }
