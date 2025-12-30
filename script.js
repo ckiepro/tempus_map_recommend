@@ -23,17 +23,32 @@ function getPlacementCategory(placement) {
 }
 
 function applyFilters() {
-  const hideWR = document.getElementById('hideWR').checked;
-  const hideTT = document.getElementById('hideTT').checked;
-  const hideG1 = document.getElementById('hideG1').checked;
+  const hideWRCheckbox = document.getElementById('hideWR');
+  const hideTTCheckbox = document.getElementById('hideTT');
+  const hideG1Checkbox = document.getElementById('hideG1');
   
-  // Enforce cascading hide rules
+  const hideWR = hideWRCheckbox.checked;
+  const hideTT = hideTTCheckbox.checked;
+  const hideG1 = hideG1Checkbox.checked;
+  
+  // Enforce cascading hide rules (when checking boxes)
   if (hideTT && !hideWR) {
-    document.getElementById('hideWR').checked = true;
+    hideWRCheckbox.checked = true;
   }
   if (hideG1 && (!hideTT || !hideWR)) {
-    document.getElementById('hideTT').checked = true;
-    document.getElementById('hideWR').checked = true;
+    hideTTCheckbox.checked = true;
+    hideWRCheckbox.checked = true;
+  }
+  
+  // Enforce cascading unhide rules (when unchecking boxes)
+  if (!hideWR) {
+    // Unchecking WR unchecks everything
+    hideTTCheckbox.checked = false;
+    hideG1Checkbox.checked = false;
+  }
+  if (!hideTT && hideWR) {
+    // Unchecking TT (while WR is checked) unchecks G1
+    hideG1Checkbox.checked = false;
   }
   
   if (!currentData) return;
