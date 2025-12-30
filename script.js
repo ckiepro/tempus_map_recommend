@@ -32,17 +32,19 @@ function applyFilters() {
   const hideG1 = hideG1Checkbox.checked;
   
   // Enforce cascading hide rules (when checking boxes)
-  if (hideTT && !hideWR) {
+  if (hideTT) {
+    // Hide TTs also hides WRs
     hideWRCheckbox.checked = true;
   }
-  if (hideG1 && (!hideTT || !hideWR)) {
+  if (hideG1) {
+    // Hide G1s also hides TTs and WRs
     hideTTCheckbox.checked = true;
     hideWRCheckbox.checked = true;
   }
   
   // Enforce cascading unhide rules (when unchecking boxes)
   if (!hideWR) {
-    // Unchecking WR unchecks everything
+    // Unchecking WR unchecks TT and G1
     hideTTCheckbox.checked = false;
     hideG1Checkbox.checked = false;
   }
