@@ -31,16 +31,35 @@ function applyFilters() {
   const hideTT = hideTTCheckbox.checked;
   const hideG1 = hideG1Checkbox.checked;
   
+  // Track what was just changed by comparing to previous state
+  // We need to determine which checkbox triggered this call
+  
   // Enforce cascading hide rules (when checking boxes)
-  if (hideTT) {
+  if (hideTT && !hideWR) {
     // Hide TTs also hides WRs
     hideWRCheckbox.checked = true;
   }
-  if (hideG1) {
+  if (hideG1 && (!hideTT || !hideWR)) {
     // Hide G1s also hides TTs and WRs
     hideTTCheckbox.checked = true;
     hideWRCheckbox.checked = true;
   }
+  
+  // Enforce cascading unhide rules (when unchecking boxes)
+  if (!hideWR && (hideTT || hideG1)) {
+    // Unchecking WR unchecks TT and G1
+    hideTTCheckbox.checked = false;
+    hideG1Checkbox.checked = false;
+  }
+  if (!hideTT && hideG1) {
+    // Unchecking TT unchecks G1
+    hideG1Checkbox.checked = false;
+  }
+  
+  if (!currentData) return;
+  
+  displayResults(currentData);
+}
   
   // Enforce cascading unhide rules (when unchecking boxes)
   if (!hideWR) {
