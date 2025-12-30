@@ -47,16 +47,19 @@ function displayResults(data) {
   const hideTT = document.getElementById('hideTT').checked;
   const hideG1 = document.getElementById('hideG1').checked;
   
-  let filtered = data.slice(0, 50); // Only show first 50
+  // Filter with original indices preserved
+  let filtered = data
+    .map((r, index) => ({ ...r, originalIndex: index + 1 })) // Add 1-based index
+    .filter(r => {
+      const category = getPlacementCategory(r.placement);
+      if (hideWR && category === 'wr') return false;
+      if (hideTT && category === 'tt') return false;
+      if (hideG1 && category === 'g1') return false;
+      return true;
+    });
   
-  // Apply filters
-  filtered = filtered.filter(r => {
-    const category = getPlacementCategory(r.placement);
-    if (hideWR && category === 'wr') return false;
-    if (hideTT && category === 'tt') return false;
-    if (hideG1 && category === 'g1') return false;
-    return true;
-  });
+  // Take only first 50 after filtering
+  filtered = filtered.slice(0, 50);
   
   if (filtered.length === 0) {
     results.innerHTML = '<p>No maps match the current filters.</p>';
@@ -69,7 +72,7 @@ function displayResults(data) {
     
     return `
       <div class="map-entry">
-        <span class="map-name">${r.map}</span>
+        <span class="map-name">${r.originalIndex}. ${r.map}</span>
         <span class="map-score">${r.score.toFixed(4)}</span>
         ${placementBadge}
         <span class="map-stats">${rankText}</span>
