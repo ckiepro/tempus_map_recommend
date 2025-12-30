@@ -22,31 +22,34 @@ function getPlacementCategory(placement) {
   return 'other';
 }
 
-function applyFilters() {
-  const hideWRCheckbox = document.getElementById('hideWR');
-  const hideTTCheckbox = document.getElementById('hideTT');
-  const hideG1Checkbox = document.getElementById('hideG1');
+function applyFilters(changed) {
+  const wr = document.getElementById('hideWR');
+  const tt = document.getElementById('hideTT');
+  const g1 = document.getElementById('hideG1');
 
-  // Enforce cascading hide rules
-  if (hideG1Checkbox.checked) {
-    hideTTCheckbox.checked = true;
-    hideWRCheckbox.checked = true;
-  } else if (hideTTCheckbox.checked) {
-    hideWRCheckbox.checked = true;
+  // Hide cascades
+  if (changed === g1 && g1.checked) {
+    tt.checked = true;
+    wr.checked = true;
   }
 
-  // Enforce cascading unhide rules
-  if (!hideWRCheckbox.checked) {
-    hideTTCheckbox.checked = false;
-    hideG1Checkbox.checked = false;
-  } else if (!hideTTCheckbox.checked) {
-    hideG1Checkbox.checked = false;
+  if (changed === tt && tt.checked) {
+    wr.checked = true;
+  }
+
+  // Unhide cascades
+  if (changed === wr && !wr.checked) {
+    tt.checked = false;
+    g1.checked = false;
+  }
+
+  if (changed === tt && !tt.checked) {
+    g1.checked = false;
   }
 
   if (!currentData) return;
   displayResults(currentData);
 }
-
 
 function displayResults(data) {
   const results = document.getElementById('results');
