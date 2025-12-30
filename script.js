@@ -60,22 +60,6 @@ function applyFilters() {
   
   displayResults(currentData);
 }
-  
-  // Enforce cascading unhide rules (when unchecking boxes)
-  if (!hideWR) {
-    // Unchecking WR unchecks TT and G1
-    hideTTCheckbox.checked = false;
-    hideG1Checkbox.checked = false;
-  }
-  if (!hideTT && hideWR) {
-    // Unchecking TT (while WR is checked) unchecks G1
-    hideG1Checkbox.checked = false;
-  }
-  
-  if (!currentData) return;
-  
-  displayResults(currentData);
-}
 
 function displayResults(data) {
   const results = document.getElementById('results');
