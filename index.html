@@ -11,6 +11,67 @@
             padding: 20px;
         }
         
+        .filters {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+        }
+        
+        .filters label {
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .filters input[type="checkbox"] {
+            cursor: pointer;
+        }
+        
+        .map-entry {
+            padding: 8px;
+            margin: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .map-name {
+            font-weight: bold;
+        }
+        
+        .map-score {
+            color: #666;
+            margin-left: 10px;
+        }
+        
+        .map-stats {
+            color: #888;
+            font-size: 0.9em;
+            margin-left: 10px;
+        }
+        
+        .placement-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+        
+        .wr {
+            background-color: #ffd700;
+            color: #000;
+        }
+        
+        .tt {
+            background-color: #c0c0c0;
+            color: #000;
+        }
+        
+        .gold {
+            background-color: #cd7f32;
+            color: #fff;
+        }
+        
         .faq {
             margin-top: 40px;
             border-top: 2px solid #ccc;
@@ -40,6 +101,22 @@
     <button onclick="loadRecommendations()">Get Recommendations</button>
 
     <h2 id="resultsHeading">Results</h2>
+    
+    <div id="filtersContainer" style="display: none;" class="filters">
+        <label>
+            <input type="checkbox" id="hideWR" onchange="applyFilters()">
+            Hide WRs
+        </label>
+        <label>
+            <input type="checkbox" id="hideTT" onchange="applyFilters()">
+            Hide TTs
+        </label>
+        <label>
+            <input type="checkbox" id="hideG1" onchange="applyFilters()">
+            Hide G1s
+        </label>
+    </div>
+    
     <div id="results"></div>
 
     <div class="faq">
