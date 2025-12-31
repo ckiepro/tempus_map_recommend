@@ -113,7 +113,7 @@ async function loadRecommendations() {
     const data = playerCache.get(playerId);
     currentData = data;
     displayResults(data);
-    resultsHeading.textContent = "Results (updated 2025-12-18)";
+    resultsHeading.textContent = "Results (updated 2025-12-30)";
     filtersContainer.style.display = "block";
     return;
   }
@@ -139,7 +139,7 @@ async function loadRecommendations() {
     currentData = data;
 
     displayResults(data);
-    resultsHeading.textContent = "Results (updated 2025-12-18)";
+    resultsHeading.textContent = "Results (updated 2025-12-30)";
     filtersContainer.style.display = "block";
 
   } catch (err) {
