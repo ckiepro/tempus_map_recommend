@@ -139,7 +139,7 @@ async function loadRecommendations() {
     currentData = data;
 
     displayResults(data);
-    resultsHeading.textContent = "Results (updated 2025-12-30)";
+    resultsHeading.textContent = "Results (updated 2026-02-02)";
     filtersContainer.style.display = "block";
 
   } catch (err) {
